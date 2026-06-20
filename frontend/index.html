@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SupplyChain-Twin — AI-augmented digital twin platform for global supply chain resilience, simulation, and optimisation.">
+    <title>SupplyChain-Twin | Digital Twin Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/styles/index.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>⚡</text></svg>">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    
+    <!-- NPS Widget -->
+    <div id="nps-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+      <button id="nps-fab" style="background: var(--primary-color); color: white; border: none; border-radius: 50%; width: 56px; height: 56px; font-size: 24px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;">💬</button>
+      <div id="nps-modal" style="display: none; position: absolute; bottom: 70px; right: 0; width: 300px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+        <h4 style="margin-top: 0;">How likely are you to recommend SupplyChain-Twin?</h4>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+          <button class="nps-score-btn" data-score="0" style="width: 22px; height: 22px; padding: 0; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-primary); cursor: pointer; border-radius: 4px; font-size: 11px;">0</button>
+          <button class="nps-score-btn" data-score="1" style="width: 22px; height: 22px; padding: 0; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-primary); cursor: pointer; border-radius: 4px; font-size: 11px;">1</button>
+          <button class="nps-score-btn" data-score="2" style="width: 22px; height: 22px; padding: 0; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-primary); cursor: pointer; border-radius: 4px; font-size: 11px;">2</button>
+          <button class="nps-score-btn" data-score="3" style="width: 22px; height: 22px; padding: 0; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-primary); cursor: pointer; border-radius: 4px; font-size: 11px;">3</button>
+          <button class="nps-score-btn" data-score="4" style="width: 22px; height: 22px; padding: 0; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-primary); cursor: pointer; border-radius: 4px; font-size: 11px;">4</button>
+          <button class="nps-score-btn" data-score="5" style="width: 22px; height: 22px; padding: 0; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-primary); cursor: pointer; border-radius: 4px; font-size: 11px;">5</button>
+          <button class="nps-score-btn" data-score="6" style="width: 22px; height: 22px; padding: 0; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-primary); cursor: pointer; border-radius: 4px; font-size: 11px;">6</button>
+          <button class="nps-score-btn" data-score="7" style="width: 22px; height: 22px; padding: 0; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-primary); cursor: pointer; border-radius: 4px; font-size: 11px;">7</button>
+          <button class="nps-score-btn" data-score="8" style="width: 22px; height: 22px; padding: 0; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-primary); cursor: pointer; border-radius: 4px; font-size: 11px;">8</button>
+          <button class="nps-score-btn" data-score="9" style="width: 22px; height: 22px; padding: 0; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-primary); cursor: pointer; border-radius: 4px; font-size: 11px;">9</button>
+          <button class="nps-score-btn" data-score="10" style="width: 22px; height: 22px; padding: 0; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-primary); cursor: pointer; border-radius: 4px; font-size: 11px;">10</button>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 15px;">
+          <span>Not likely</span><span>Very likely</span>
+        </div>
+        <textarea id="nps-comment" placeholder="What is the primary reason for your score? (Optional)" style="width: 100%; height: 60px; background: var(--bg-color); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 4px; padding: 8px; margin-bottom: 10px; font-family: inherit; font-size: 13px;"></textarea>
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+          <button id="nps-cancel" class="btn btn-sm">Cancel</button>
+          <button id="nps-submit" class="btn btn-sm btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="src/app.js"></script>
+</body>
+</html>
