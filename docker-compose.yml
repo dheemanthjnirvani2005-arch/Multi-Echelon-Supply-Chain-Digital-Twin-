@@ -1,0 +1,40 @@
+# docker-compose.yml
+version: '3.9'
+services:
+  postgres:
+    image: timescale/timescaledb:latest-pg16
+    environment:
+      POSTGRES_DB: supplychain
+      POSTGRES_USER: scadmin
+      POSTGRES_PASSWORD: scpassword
+    ports: ['5433:5432']
+    volumes: ['pgdata:/var/lib/postgresql/data']
+
+  redis:
+    image: redis:7-alpine
+    ports: ['6379:6379']
+
+  neo4j:
+    image: neo4j:5
+    environment:
+      NEO4J_AUTH: neo4j/scpassword
+    ports: ['7474:7474', '7687:7687']
+    volumes: ['neo4jdata:/data']
+
+  # ── MQTT Broker (Phase 3) ────────────────────────────────────────
+  mosquitto:
+    image: eclipse-mosquitto:2
+    ports:
+      - '1883:1883'    # MQTT protocol port
+      - '9001:9001'    # WebSocket port (browsers)
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+
+volumes:
+  pgdata:
+  neo4jdata:
+  mosquitto_data:
+  mosquitto_log:
+
